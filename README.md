@@ -75,7 +75,7 @@ cd esdmd
 
     Open `config.py` and set:
 
-    - `sysname` (e.g. `"kuramoto"`)
+    - `self.sysname` (e.g. `"kuramoto"`)
     - ranks (`self.batch_rank` and `self.streaming_rank`)
     - simulation parameters (`self.n`, `self.fs`, `self.duration`)
     - system specifications (e.g. `omega_range`, `v_dist`, etc.)
