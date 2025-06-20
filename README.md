@@ -1,6 +1,7 @@
 # Efficient Streaming Dynamic Mode Decomposition
 
 **Repository accompanying:**
+
 "_Efficient Streaming Dynamic Mode Decomposition_"
 
 - _Aditya Kale_, _Marcos Netto_, _Xinyang Zhou_
@@ -128,4 +129,4 @@ Please cite our paper if you use the code in this repository:
 
 ### License
 
-
+This work is licensed under the MIT license. See the [LICENSE](LICENSE) file for more details.
