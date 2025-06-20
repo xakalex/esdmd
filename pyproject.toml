@@ -1,0 +1,28 @@
+[project]
+name = "esdmd"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+  { name = "Aditya Kale", email = "apk22@njit.edu" },
+  { name = "Marcos Netto", email = "marcos.netto@njit.edu" },
+  { name = "Xinyang Zhou", email = "Xinyang.Zhou@nrel.gov" },
+]
+requires-python = ">=3.13"
+classifiers = [ "Programming Language :: Python :: 3 :: Only", "Programming Language :: Python :: 3.13" ]
+dependencies = [
+  "matplotlib>=3.10.3",
+  "networkx>=3.5",
+  "numpy>=2.3.0",
+  "scipy>=1.15.3",
+]
+
+[tool.basedpyright]      
+typeCheckingMode = "off" 
+                         
+[tool.ruff]              
+line-length = 120        
+ignore = ["F401"]        
+                         
+[tool.black]             
+line-length = 120        
