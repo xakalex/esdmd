@@ -72,11 +72,12 @@ cd esdmd
 ## Quickstart
 
 1.  **Configure the experiment**
+
     Open `config.py` and set:
 
     - `sysname` (e.g. `"kuramoto"`)
-    - ranks (`batch_rank` and `streaming_rank`)
-    - simulation parameters (`n`, `fs`, `duration`)
+    - ranks (`self.batch_rank` and `self.streaming_rank`)
+    - simulation parameters (`self.n`, `self.fs`, `self.duration`)
     - system specifications (e.g. `omega_range`, `v_dist`, etc.)
 
 2.  **Run the main script**
