@@ -36,4 +36,4 @@ class Config:
         self.markercolor = dict(esdmd="red", sdmd="blue", dmd="grey")
 
         # plot display
-        self.show_plots = "eigenvalues"  # all, mode-frequency, exectime, eigenvalues
+        self.show_plots = {"eigenvalues"}  # all, mode-frequency, exectime, eigenvalues

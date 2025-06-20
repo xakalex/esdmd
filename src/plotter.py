@@ -168,18 +168,18 @@ class Plotter(DataUtils):
         ax.tick_params(**self.tickparams)
 
     def plot(self):
-        match self.cfg.show_plots:
-            case "all":
-                self.plot_eigenvalues()
-                self.plot_mode_frequencies()
-                self.plot_exectimes()
-            case "mode-frequency":
-                self.plot_mode_frequencies()
-            case "exectime":
-                self.plot_exectimes()
-            case "eigenvalues":
-                self.plot_eigenvalues()
-            case _:
-                raise ValueError(f"Unknown plot type: {self.cfg.show_plots}")
+        plots = {
+            "eigenvalues": self.plot_eigenvalues,
+            "mode-frequency": self.plot_mode_frequencies,
+            "exectime": self.plot_exectimes,
+        }
+
+        if "all" in self.cfg.show_plots:
+            to_plot = [fn for _, fn in plots.items()]
+        else:
+            to_plot = [plots[p] for p in self.cfg.show_plots if p in plots]
+
+        for fn in to_plot:
+            fn()
 
         plt.show()
