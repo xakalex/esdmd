@@ -110,15 +110,14 @@ python main.py --figure mode-frequency exectime
 
 ## Citing This Work
 
-Please cite our paper if you use the code in this repository:
+Suggested citation:
 
 ```bibtex
-@inproceedings{Kale2025Streaming,
-    title = {Efficient Streaming Dynamic Mode Decomposition},
-    author = {Aditya kale, Marcos Netto, Xinyang Zhou},
-    booktitle = {},
-    year = {2025},
-    pages = {}
+@article{Kale2025,
+title={Efficient streaming dynamic mode decomposition},
+author={Aditya Kale and Marcos Netto and Xinyang Zhou},
+journal={preprint, arXiv:XXXX.XXXXXv1},
+year={2025}
 }
 ```
 
