@@ -13,8 +13,8 @@ def main():
         "--figure",
         choices=["all", "eigenvalues", "mode-frequency", "exectime"],
         nargs="+",
-        default=["all"],
-        help="Specify which figures to plot. Default is all.",
+        default=[""],
+        help="Specify which figures to plot. Default is whatever is specified in the config.",
     )
     args = parser.parse_args()
 
@@ -22,8 +22,6 @@ def main():
     cfg = Config()
     if "all" in args.figure:
         cfg.show_plots = {"all"}
-    else:
-        cfg.show_plots = set(args.figure)
 
     # load utils
     du = DataUtils(cfg)
