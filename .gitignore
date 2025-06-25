@@ -11,3 +11,8 @@ wheels/
 
 # misc
 uv.lock
+
+# others
+src/plotter2.py
+images/
+run_number
