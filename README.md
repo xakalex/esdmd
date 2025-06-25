@@ -1,17 +1,15 @@
-# Efficient Streaming Dynamic Mode Decomposition
+# Efficient streaming dynamic mode decomposition
 
 **Repository accompanying:**
 
-"_Efficient Streaming Dynamic Mode Decomposition_" by _Aditya Kale_, _Marcos Netto_, and _Xinyang Zhou_
+"Efficient streaming dynamic mode decomposition" by Aditya Kale, Marcos Netto, and Xinyang Zhou
   \<link-to-paper-pdf\>
 
 ---
 
 ## Overview
 
-This repository contains a reference Python implementation of the efficient streaming
-DMD algorithm introduced in our paper. It is intended for _reproducibility_ and
-_extension_ by other researchers.
+This repository contains a reference Python implementation of the efficient streaming dynamic mode decomposition (esDMD) algorithm introduced in our paper. It is intended for _reproducibility_ and _extension_ by other researchers.
 
 ## Prerequisites and installation
 
@@ -73,10 +71,10 @@ cd esdmd
 
     Open `config.py` and set:
 
-    - `self.sysname` (e.g. `"kuramoto"`)
+    - `self.sysname` (e.g., `"kuramoto"`)
     - ranks (`self.batch_rank` and `self.streaming_rank`)
     - simulation parameters (`self.n`, `self.fs`, `self.duration`)
-    - system specifications (e.g. `omega_range`, `v_dist`, etc.)
+    - system specifications (e.g., `omega_range`, `v_dist`, etc.)
 
 2.  **Run the main script**
 
