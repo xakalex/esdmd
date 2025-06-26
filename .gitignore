@@ -16,3 +16,5 @@ uv.lock
 src/plotter2.py
 images/
 run_number
+csvs/
+main2.py
