@@ -6,22 +6,8 @@ from src.plotter import Plotter
 
 
 def main():
-    # parse cli flag
-    parser = argparse.ArgumentParser(description="Run DMD, sDMD and esDMD and produce plots.")
-    parser.add_argument(
-        "-f",
-        "--figure",
-        choices=["all", "eigenvalues", "mode-frequency", "exectime"],
-        nargs="+",
-        default=[""],
-        help="Specify which figures to plot. Default is whatever is specified in the config.",
-    )
-    args = parser.parse_args()
-
-    # override config
+    # override config if required
     cfg = Config()
-    if "all" in args.figure:
-        cfg.show_plots = {"all"}
 
     # load utils
     du = DataUtils(cfg)

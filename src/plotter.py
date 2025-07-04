@@ -114,6 +114,21 @@ class Plotter(DataUtils):
         distances = np.abs(evals - complex(*region_coords))
         return np.any(distances <= radius)
 
+    @staticmethod
+    def _smart_radius(evals_sdmd, evals_esdmd, region_coords, rmax=0.3, rmin=0.05, pad=1.1):
+        center = complex(*region_coords)
+
+        all_evals = np.hstack((evals_sdmd, evals_esdmd))
+        dists = np.abs(all_evals - center)
+
+        in_window = dists <= rmax
+        if not any(in_window):
+            return rmax
+
+        r_data = dists[in_window].max() * pad
+
+        return float(np.clip(r_data, rmin, rmax))
+
     def plot_eigenvalues(self):
         evals = dict(dmd=self.dmd_evals, sdmd=self.sdmd_evals[:, -1], esdmd=self.esdmd_evals[:, -1])
 
@@ -126,12 +141,13 @@ class Plotter(DataUtils):
         gs = fig.add_gridspec(2, 2, width_ratios=[3, 1], height_ratios=[1, 1], wspace=0.3, hspace=0.3)
         ax_main = fig.add_subplot(gs[:, 0])
 
-        radius = 0.3  # radius for zoom regions
+        radius_0 = self._smart_radius(evals["sdmd"], evals["esdmd"], (0, 0))
+        radius_1 = self._smart_radius(evals["sdmd"], evals["esdmd"], (1, 0))
 
-        sdmd_near_0 = self.streaming_near_region(evals["sdmd"], (0, 0), radius)
-        esdmd_near_0 = self.streaming_near_region(evals["esdmd"], (0, 0), radius)
-        sdmd_near_1 = self.streaming_near_region(evals["sdmd"], (1, 0), radius)
-        esdmd_near_1 = self.streaming_near_region(evals["esdmd"], (1, 0), radius)
+        sdmd_near_0 = self.streaming_near_region(evals["sdmd"], (0, 0), radius_0)
+        esdmd_near_0 = self.streaming_near_region(evals["esdmd"], (0, 0), radius_0)
+        sdmd_near_1 = self.streaming_near_region(evals["sdmd"], (1, 0), radius_1)
+        esdmd_near_1 = self.streaming_near_region(evals["esdmd"], (1, 0), radius_1)
         axr = {}
 
         if (sdmd_near_0 or esdmd_near_0) and (sdmd_near_1 or esdmd_near_1):
@@ -207,8 +223,8 @@ class Plotter(DataUtils):
         # regions
         region_text = {0: "Region around $0+0j$", 1: "Region around $1+0j$"}
         lims = {
-            0: {"x": (-radius, radius), "y": (-radius, radius)},
-            1: {"x": (1 - radius, 1 + radius), "y": (-radius, radius)},
+            0: {"x": (-radius_0, radius_0), "y": (-radius_0, radius_0)},
+            1: {"x": (1 - radius_1, 1 + radius_1), "y": (-radius_1, radius_1)},
         }
         for i in axr.keys():
             ax = axr[i]
@@ -229,8 +245,6 @@ class Plotter(DataUtils):
             ax.set_xticks([])
             ax.set_yticks([])
             ax.set_title(region_text[i])
-
-        plt.tight_layout()
 
         return fig
 
@@ -253,10 +267,14 @@ class Plotter(DataUtils):
         y_pos = np.arange(len(algs))
         xticks = np.linspace(0, max(means) + 1.25 * max(errors), 4)
 
+        # errors
+        lower = np.minimum(errors, means)
+        upper = errors
+
         bars = ax.barh(
             y_pos,
             means,
-            xerr=errors,
+            xerr=np.vstack([lower, upper]),
             color=colors,
             alpha=0.8,
             edgecolor="none",
@@ -279,33 +297,44 @@ class Plotter(DataUtils):
                 color="white",
                 fontsize="xx-large",
                 fontweight="bold",
-                rotation=90
+                rotation=90,
             )
         ax.invert_yaxis()
 
+        # legend
+        err_handle = ax.errorbar(
+            [np.nan],
+            [np.nan],
+            xerr=1,
+            fmt="none",
+            capsize=5,
+            elinewidth=2,
+            capthick=2,
+            color="black"
+        )
+        ax.legend(
+            handles=[err_handle],
+            labels=[r"$\pm\,1\sigma$"],
+            loc="upper right",
+            fontsize="xx-large",
+            frameon=False,
+            handletextpad=0.25,
+            handlelength=2,
+        )
+
         ax.set_xticks(xticks)
         ax.xaxis.set_major_formatter(plt.FuncFormatter(self._smart_fmt))
+        ax.set_xlim(left=0)
         ax.minorticks_off()
         ax.tick_params(axis="x", which="both", length=0)
 
         ax.set_xlabel("Execution Time (ms)")
-        ax.grid(axis="x", linestyle=":", alpha=0.5)
-        plt.tight_layout()
+        ax.grid(False)
         return fig
 
     def plot(self):
-        plots = {
-            "eigenvalues": self.plot_eigenvalues,
-            "mode-frequency": self.plot_mode_frequencies,
-            "exectime": self.plot_exectimes,
-        }
-
-        if "all" in self.cfg.show_plots:
-            to_plot = [fn for _, fn in plots.items()]
-        else:
-            to_plot = [plots[p] for p in self.cfg.show_plots if p in plots]
-
-        for fn in to_plot:
+        plot_fns = [self.plot_eigenvalues, self.plot_mode_frequencies, self.plot_exectimes]
+        for fn in plot_fns:
             fn()
 
         plt.show()

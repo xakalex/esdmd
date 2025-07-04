@@ -4,7 +4,7 @@ import numpy as np
 class Config:
     def __init__(self):
         # system generation configuration
-        self.sysname = "kuramoto"  # name of the dynamical system to run: kuramoto or oscillatory
+        self.sysname = "oscillatory"  # name of the dynamical system to run: kuramoto or oscillatory
         self.n = 100  # number of states to simulate
         self.fs = 120  # sampling frequency in Hz
         self.duration = 10  # total duration of the simulation in seconds
@@ -36,6 +36,3 @@ class Config:
         self.markercolor = dict(esdmd="#1e90ff", sdmd="#ff1e20", dmd="grey")
         self.markerface = dict(esdmd="none", sdmd="#ff1e20", dmd="grey")
         self.markeralpha = dict(esdmd=0.9, sdmd=0.8, dmd=0.55)
-
-        # plot display
-        self.show_plots = {"eigenvalues"}  # all, mode-frequency, exectime, eigenvalues
