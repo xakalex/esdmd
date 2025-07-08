@@ -2,7 +2,8 @@
 
 **Repository accompanying:**
 
-"Efficient streaming dynamic mode decomposition" by Aditya Kale, Marcos Netto, and Xinyang Zhou \<link-to-paper-pdf\>
+"Efficient streaming dynamic mode decomposition" by Aditya Kale, Marcos Netto, and Xinyang Zhou
+([arXiv link](https://www.arxiv.org/abs/2507.03770))
 
 ---
 
