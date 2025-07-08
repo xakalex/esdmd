@@ -102,7 +102,7 @@ Suggested citation:
 @article{Kale2025,
 title={Efficient streaming dynamic mode decomposition},
 author={Aditya Kale and Marcos Netto and Xinyang Zhou},
-journal={preprint, arXiv:2507.03770},
+journal={preprint, arXiv:2507.03770v1},
 year={2025}
 }
 ```
