@@ -28,9 +28,8 @@ class Kuramoto:
         return dxdt
 
     def integrate(self, angles_vec, t):
-        """Updates all states by integrating state of all nodes"""
         timeseries = odeint(self.derivative, angles_vec, t)
-        return timeseries.T  # transpose for consistency (act_mat:node vs time)
+        return timeseries.T
 
     def simulate(self):
         angles_vec = self.theta0

@@ -1,5 +1,3 @@
-import argparse
-
 from config import Config
 from src.data_utils import DataUtils
 from src.plotter import Plotter

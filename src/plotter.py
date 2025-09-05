@@ -30,6 +30,15 @@ class Plotter(DataUtils):
             s = s.rstrip("0").rstrip(".")
         return s
 
+    def plot_trajectories(self):
+        fig, ax = plt.subplots(figsize=(2, 4))
+        for i in range(self.cfg.n):
+            ax.plot(self.t, self.data_matrix[i, :], lw=1)
+        ax.set_xlabel("Time (s)")
+        ax.set_ylabel(self.cfg.statelabel[self.cfg.sysname])
+        ax.set_xlim(self.t.min(), self.t.max())
+        return fig
+
     def get_mode_frequencies(self, modes, evals):
         freqs = np.abs(np.angle(evals)) / (2 * np.pi * self.dt)
         mags = np.array([np.linalg.norm(modes[:, i]) * np.abs(evals[i]) for i in range(len(freqs))])
@@ -303,14 +312,7 @@ class Plotter(DataUtils):
 
         # legend
         err_handle = ax.errorbar(
-            [np.nan],
-            [np.nan],
-            xerr=1,
-            fmt="none",
-            capsize=5,
-            elinewidth=2,
-            capthick=2,
-            color="black"
+            [np.nan], [np.nan], xerr=1, fmt="none", capsize=5, elinewidth=2, capthick=2, color="black"
         )
         ax.legend(
             handles=[err_handle],
@@ -333,7 +335,7 @@ class Plotter(DataUtils):
         return fig
 
     def plot(self):
-        plot_fns = [self.plot_eigenvalues, self.plot_mode_frequencies, self.plot_exectimes]
+        plot_fns = [self.plot_eigenvalues, self.plot_mode_frequencies, self.plot_exectimes, self.plot_trajectories]
         for fn in plot_fns:
             fn()
 

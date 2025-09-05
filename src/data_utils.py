@@ -5,6 +5,7 @@ import numpy as np
 
 from src.esdmd import EfficientStreamingDMD
 from src.kuramoto import Kuramoto
+from src.lorenz96 import Lorenz96
 from src.oscillatory import Oscillatory
 from src.sdmd import StreamingDMD
 
@@ -15,7 +16,7 @@ class DataUtils:
         self.dt = 1 / cfg.fs
         self.m = (cfg.duration * cfg.fs) - 1
 
-        self.sys_objects = dict(kuramoto=Kuramoto, oscillatory=Oscillatory)
+        self.sys_objects = dict(kuramoto=Kuramoto, oscillatory=Oscillatory, lorenz96=Lorenz96)
         self.t, self.data_matrix = self.simulate_system()
         self.X, self.Y = self.data_matrix[:, :-1], self.data_matrix[:, 1:]
 
