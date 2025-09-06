@@ -60,6 +60,7 @@ cd esdmd
     ├── data_utils.py
     ├── esdmd.py
     ├── kuramoto.py
+    ├── lorenz96.py
     ├── oscillatory.py
     ├── plotter.py
     └── sdmd.py
