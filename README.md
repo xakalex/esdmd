@@ -3,7 +3,7 @@
 **Repository accompanying:**
 
 "Efficient streaming dynamic mode decomposition" by Aditya Kale, Marcos Netto, and Xinyang Zhou
-([arXiv link](https://www.arxiv.org/abs/2507.03770))
+([paper link](https://doi.org/10.1109/LCSYS.2025.3622516))
 
 ---
 
@@ -102,11 +102,14 @@ Suggested citation:
 
 ```bibtex
 @article{Kale2025,
-title={Efficient streaming dynamic mode decomposition},
-author={Aditya Kale and Marcos Netto and Xinyang Zhou},
-journal={preprint, arXiv:2507.03770v1},
-year={2025}
-}
+author={Kale, Aditya and Netto, Marcos and Zhou, Xinyang},
+journal={IEEE Control Systems Letters}, 
+title={Efficient Streaming Dynamic Mode Decomposition}, 
+year={2025},
+volume={9},
+number={},
+pages={2387-2392},
+doi={10.1109/LCSYS.2025.3622516},}
 ```
 
 ### License
